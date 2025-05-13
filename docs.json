@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Reverie Documentation",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
@@ -9,94 +9,159 @@
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "tabs": [
+    "groups": [
       {
-        "tab": "Guides",
-        "groups": [
+        "group": "Getting Started",
+        "pages": [
+          "introduction",
+          "authentication",  
+          "analytics",        
+          "contact-us"
+          
+        ]
+      },
+      {
+        "group": "Usage Guides",
+        "pages": [
           {
-            "group": "Get Started",
+            "group": "Speech to Text",
             "pages": [
-              "index",
-              "quickstart",
-              "development"
+              {
+                "group": "Speech-to-Text (Streaming)",
+                "pages": [
+                  "usage-guides/speech-to-text-streaming/getting-started",
+                  "usage-guides/speech-to-text-streaming/key-features",
+                  "usage-guides/speech-to-text-streaming/sample-code"
+                ]
+              },
+              {
+                "group": "Speech-to-Text (Batch)",
+                "pages": [
+                  "usage-guides/speech-to-text-batch/getting-started",
+                  "usage-guides/speech-to-text-batch/key-features",
+                  "usage-guides/speech-to-text-batch/sample-code"
+                ]
+              },
+              "usage-guides/speech-to-text/supported-languages",
+              "usage-guides/speech-to-text/supported-domains",
+              "usage-guides/speech-to-text/supported-audio-formats"
             ]
           },
           {
-            "group": "Essentials",
+            "group": "Text-to-Speech",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
+              "usage-guides/text-to-speech/getting-started",
+              "usage-guides/text-to-speech/key-features",
+              "usage-guides/text-to-speech/supported-speakers",
+              "usage-guides/text-to-speech/supported-audio-formats",
+              "usage-guides/text-to-speech/supported-sampling-rates",                     
+              "usage-guides/text-to-speech/sample-code",              
+              "usage-guides/text-to-speech/ssml-tags"
+            ]
+          },
+          {
+            "group": "Translation",
+            "pages": [
+              "usage-guides/localization/getting-started",
+              "usage-guides/localization/key-features",
+              "usage-guides/localization/supported-languages",
+              "usage-guides/localization/supported-domains",              
+              "usage-guides/localization/sample-code"
+            ]
+          },
+          {
+            "group": "Transliteration",
+            "pages": [
+              "usage-guides/transliteration/getting-started",
+              "usage-guides/transliteration/key-features",
+              "usage-guides/transliteration/supported-languages",
+              "usage-guides/transliteration/supported-domains",              
+              "usage-guides/transliteration/sample-code"
             ]
           }
         ]
       },
       {
-        "tab": "API Reference",
-        "groups": [
-          {
-            "group": "API Documentation",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint Examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
-            ]
-          }
+        "group": "API References",
+        "pages": [
+          "api-reference/speech-to-text-streaming",
+          "api-reference/speech-to-text-batch",
+          "api-reference/text-to-speech",
+          "api-reference/localization",
+          "api-reference/transliteration"
+        ]
+      },
+      {
+        "group": "Use Cases",
+        "pages": [
+          "use-cases/voice-agent",
+          "use-cases/voice-search",
+          "use-cases/call-center-transcription",
+          "use-cases/speech-translation",
+          "use-cases/speech-to-speech"
+        ]
+      },
+      {
+        "group": "SDKs",
+        "pages": [
+          "sdk/javascript",
+          "sdk/python",
+          "sdk/go"
+        ]
+      },
+      {
+        "group": "Endpoints",
+        "pages": [
+           "endpoints/transliteration",
+           "endpoints/localization",
+           "endpoints/text-to-speech"
         ]
       }
     ],
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "Discord Community",
+          "href": "https://discord.com/invite/ba8TT9UYfu",
+          "icon": "discord"
         },
         {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
+          "anchor": "Postman Collections",
+          "href": "https://www.postman.com/reverieinc/reverie-apis/collection/6fpi068/reverie-apis?action=share&creator=529945",
+          "icon": "code"
         },
         {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "NPM Packages",
+          "href": "https://www.npmjs.com/package/@reverieit/reverie-client",
+          "icon": "js"
+        },
+        {
+          "anchor": "Python SDK",
+          "href": "https://pypi.org/project/reverie-sdk/",
+          "icon": "python"
         }
       ]
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/revLogo.svg",
+    "dark": "/logo/revLogoWhite.svg"
   },
   "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
-      }
-    ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Visit RevUp Dashboard",
+      "href": "https://revup.reverieinc.com?utm_source=documentation&utm_medium=website&utm_campaign=revup_signup"
     }
   },
   "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+    "socials": {      
+      "github": "https://github.com/reverieinc",      
+      "linkedin": "https://www.linkedin.com/company/reverie-language-technologies-pvt-ltd/",      
+      "youtube": "https://www.youtube.com/@reverielanguagetechnologie2440",
+      "x": "https://x.com/ReverieTech",      
+      "instagram": "https://www.instagram.com/reverietech/?next=%2F",
+      "facebook": "https://www.facebook.com/reverietech"
     }
   }
 }

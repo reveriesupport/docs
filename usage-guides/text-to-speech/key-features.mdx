@@ -1,0 +1,95 @@
+---
+title: "Key Features"
+---
+### `ssml` Tags
+The SSML input to synthesize an audio output. If you want to follow W3 standards, the ssml field must be used and not the text field. Refer [here](/usage-guides/text-to-speech/ssml-tags) to know more about SSML Inputs.
+
+| SSML Tag     | Description                                          |
+|--------------|------------------------------------------------------|
+| `<prosody>`  | Controls the pitch, rate, and volume of speech.      |
+| `<say-as>`   | Defines how the enclosed text should be spoken (e.g., as a number, date, etc.). |
+| `<sub>`      | Substitutes one word or phrase for another when speaking. |
+| `<break>`    | Adds a pause in speech for a specified duration.     |
+| `<p>`        | Indicates a paragraph break, resulting in a pause.   |
+| `<s>`        | Represents a sentence break, adding a pause.        |
+| `<speak>`    | The root tag that defines the speech content.        |
+| `<voice>`    | Specifies which voice to use for speech (e.g., male, female). |
+
+### `speed` 
+The speech rate of the audio file. Allows values: from 0.5 (slowest speed rate) up to 1.5 (fastest speed rate). Note: By default, speed = 1 (normal speed).
+
+**For Example**: 
+<CodeGroup>
+```bash cURL 
+curl --location --request POST 'https://revapi.reverieinc.com/' \
+--header 'REV-API-KEY: <YOUR API KEY>' \
+--header 'REV-APP-ID: <YOUR APP-ID>' \
+--header 'REV-APPNAME: tts' \
+--header 'speaker: hi_female' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+	"text": ["भारत मेरा देश है। मेरी कंपनी का नाम रेवेरी लैंग्वेज टेक्नोलॉजीज है।" ], 
+	"speed": 1, 
+}'
+```
+```
+</CodeGroup>
+
+### `pitch` 
+Speaking pitch, in the range Allows values: from -3 up tp 3. 3 indicates an increase of 3 semitones from the original pitch. -3 indicates a decrease of 3 semitones from the original pitch. Note: By default, the pitch = 0 (zero)
+
+**For Example**: 
+<CodeGroup>
+```bash cURL
+curl --location --request POST 'https://revapi.reverieinc.com/' \
+--header 'REV-API-KEY: <YOUR API KEY>' \
+--header 'REV-APP-ID: <YOUR APP-ID>' \
+--header 'REV-APPNAME: tts' \
+--header 'speaker: hi_female' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+	"text": ["भारत मेरा देश है। मेरी कंपनी का नाम रेवेरी लैंग्वेज टेक्नोलॉजीज है।" ], 
+	"pitch": -3, 
+}'
+```
+</CodeGroup>
+
+### `sample_rate` 
+The sampling rate (in hertz) to synthesize the audio output. Refer to [Supporting Sampling Rate](/usage-guides/text-to-speech/supported-sampling-rates), to know the supporting audio sample rates. Note: By default, the sample_rate = 22050 Hz (22.05kHz)
+
+**For Example**: 
+<CodeGroup>
+```bash cURL 
+curl --location --request POST 'https://revapi.reverieinc.com/' \
+--header 'REV-API-KEY: <YOUR API KEY>' \
+--header 'REV-APP-ID: <YOUR APP-ID>' \
+--header 'REV-APPNAME: tts' \
+--header 'speaker: hi_female' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+	"text": ["भारत मेरा देश है। मेरी कंपनी का नाम रेवेरी लैंग्वेज टेक्नोलॉजीज है।" ], 
+	"sample_rate": 22050, 
+}'
+```
+</CodeGroup>
+
+### `format` 
+The speech audio format to generate the audio file. Refer to [Supporting Audio Formats](/usage-guides/text-to-speech/supported-audio-formats), to know the supporting audio formats. Note: By default, the format = WAV
+
+**For Example**: 
+<CodeGroup>
+```bash cURL 
+curl --location --request POST 'https://revapi.reverieinc.com/' \
+--header 'REV-API-KEY: <YOUR API KEY>' \
+--header 'REV-APP-ID: <YOUR APP-ID>' \
+--header 'REV-APPNAME: tts' \
+--header 'speaker: hi_female' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+	"text": ["भारत मेरा देश है। मेरी कंपनी का नाम रेवेरी लैंग्वेज टेक्नोलॉजीज है।" ], 
+	"format": wav, 
+}'
+```
+</CodeGroup>
+
+
