@@ -34,19 +34,19 @@
                   "usage-guides/speech-to-text-streaming/sample-code"
                 ]
               },
+               {
+                "group": "Speech-to-Text (File)",
+                "pages": [
+                  "usage-guides/speech-to-text-file/getting-started",
+                  "usage-guides/speech-to-text-file/key-features"
+                ]
+              },
               {
                 "group": "Speech-to-Text (Batch)",
                 "pages": [
                   "usage-guides/speech-to-text-batch/getting-started",
                   "usage-guides/speech-to-text-batch/key-features",
                   "usage-guides/speech-to-text-batch/sample-code"
-                ]
-              },
-              {
-                "group": "Speech-to-Text (File)",
-                "pages": [
-                  "usage-guides/speech-to-text-file/getting-started",
-                  "usage-guides/speech-to-text-file/key-features"
                 ]
               },
               "usage-guides/speech-to-text/supported-languages",
@@ -92,8 +92,8 @@
         "group": "API References",
         "pages": [
           "api-reference/speech-to-text-streaming",
-          "api-reference/speech-to-text-batch",
           "api-reference/speech-to-text-file",
+          "api-reference/speech-to-text-batch",      
           "api-reference/text-to-speech",
           "api-reference/localization",
           "api-reference/transliteration"
