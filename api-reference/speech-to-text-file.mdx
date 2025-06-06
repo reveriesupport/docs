@@ -1,0 +1,169 @@
+---
+title: "Speech-to-Text (File) API"
+description: "The Speech-to-Text API  powered by Reverie's AI technology accurately converts speech into text.  The solution can transcribe audio files of various Indian languages and audio formats."
+playground: "none"
+---
+
+# How Does API Work?
+
+The process to transcribe an audio file:
+
+- Post the request by:
+  - Enter the valid `REV-APPNAME`, `REV-APP-ID`, and `REV-API-KEY`.
+  - Define the Language Code and domain.
+  - Upload the audio file to transcribe.
+  - Define the audio format, if required.
+- The API will return the text in the requested Indian language.
+
+## cURL for Integration
+### Step 1 : Upload the Audio File
+#### Request : Transcribing Audio
+```bash
+curl --location --request POST 'https://revapi.reverieinc.com/' \
+--header 'src_lang: hi' \
+--header 'domain: generic' \
+--header 'REV-API-KEY: <YOUR API KEY>' \
+--header 'REV-APPNAME: stt_file' \
+--header 'REV-APP-ID: <YOUR API-ID>' \
+--form 'audio_file=@"<File Path>"
+```
+
+#### Request: Transcribing Audio other than Default Format
+```bash
+curl --location --request POST 'https://revapi.reverieinc.com/' \
+--header 'src_lang: hi' \
+--header 'domain: generic' \
+--header 'REV-API-KEY: <YOUR API KEY>' \
+--header 'REV-APPNAME: stt_file' \
+--header 'REV-APP-ID: <YOUR API-ID>' \
+--header 'format: mp3'
+--form 'audio_file=@"<File Path>"'
+```
+
+#### Response: Success
+```json
+{
+    "id": "ddf4ebda44af4fdf95118af9a6f14d46fce12ed85347471d",
+    "success": true,
+    "final": true,
+    "text": "नाइनटी एट पॉइंट थ्री एफएम पर प्ले करिए",
+    "cause": "EOF received",
+    "confidence": 0.891,
+    "display_text": "98.3 एफएम पर प्ले करिए"
+}
+```
+#### Response: Error Message
+```json 
+{
+    "id": "03e4f260551345e6832bf62ba273e0096fd303e72f94453f",
+    "success": false,
+    "text": "",
+    "final": true,
+    "confidence": 1.0,
+    "cause": "no file given",
+    "display_text": ""  }
+```
+
+## API References
+
+### HTTP Request URL
+| URL Elements       | Sample URL                     |
+|--------------------|--------------------------------|
+| https://(hostname) | https://revapi.reverieinc.com/ |
+
+#### Headers
+
+<ParamField header="REV-API-KEY" type="string" required>
+  {" "}
+  API key shared by the Reverie team
+</ParamField> 
+<ParamField header="REV-APP-ID" type="string" required>
+  {" "}
+  APP ID shared by the Reverie team
+</ParamField>
+<ParamField header="REV-APPNAME" type="string" required>
+  {" "}
+  Value if this string should always be `stt_file` 
+</ParamField>
+<ParamField header="src_lang" type="string" required>
+  {" "}  
+- Specify the language code.  <br />
+- Example: `hi` <br />
+- Refer to section [Language Codes](/usage-guides/speech-to-text/supported-languages) for valid language code.
+</ParamField>  
+
+<ParamField header="domain" type="string" required>
+  {" "}
+  
+- This field identifies your use case type and set of the terminology defined for transcription.  <br />
+- e.g. for general audio is ‘generic’ <br />
+- It is only required for the first API i.e Upload File API.
+</ParamField> 
+
+<ParamField header="format" type="string">
+  {" "}
+  
+- Mention the audio sample rate and file format of the uploaded file.    <br />
+- Refer to section [Supported Audio Formats](/usage-guides/speech-to-text/supported-audio-formats) for valid audio format code. <br />
+- It is only required for the first API i.e Upload File API
+- Note: 
+    - By default, the format = `16k_int16`. (WAV, Signed 16 bit, 16,000 or 16K Hz).
+    - It is an optional parameter.
+</ParamField> 
+
+#### Query Parameter
+<ParamField query="audio_file" type="file" required>
+  {" "}
+  
+- An audio file for which the transcript is desired.
+</ParamField> 
+#### Response
+<ParamField header="id" type="string">
+  {" "}
+  
+- A unique Identity number auto-assigned by the API for each request, to be used to fetch job status and transcripts.
+
+</ParamField> 
+
+<ParamField header="success" type="boolean">
+  {" "}
+  
+- Provides true or false based on the nature of the response returned by the API.
+
+</ParamField> 
+
+
+<ParamField header="final" type="boolean">
+  {" "}
+  
+- Provides whether the response is the final response returned by the API.
+
+</ParamField> 
+
+<ParamField header="text" type="string">
+  {" "}
+  
+- Provides the trascripted response returned by the API for the audio file.
+
+</ParamField>
+
+<ParamField header="cause" type="string">
+  {" "}
+  
+- Reason for obtaining the final output, generally due to End Of File (EOF) received.
+
+</ParamField>
+
+<ParamField header="confidence" type="float">
+  {" "}
+  
+- Provides the confidence on the scale of 0 - 1 for the output.
+
+</ParamField>
+
+<ParamField header="display_text" type="string">
+  {" "}
+  
+- Provides the display text for the final output based on some post processing.
+
+</ParamField>

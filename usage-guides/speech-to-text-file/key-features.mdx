@@ -1,0 +1,127 @@
+---
+title: "Key Features"
+---
+
+### `domain` 
+This field identifies your use case type and set of the terminology defined for transcription. e.g. for general audio is ‘generic’. Refer to [Supporting Domain](/usage-guides/speech-to-text/supported-domains) to see the available domains.
+
+**For Example**: 
+<CodeGroup>
+```bash generic
+curl --location --request POST 'https://revapi.reverieinc.com/upload' \
+--header 'src_lang: hi' \
+--header 'domain: generic' \
+--header 'REV-API-KEY: <YOUR API KEY>' \
+--header 'REV-APPNAME: stt_file' \
+--header 'REV-APP-ID: <YOUR API-ID>' \
+--form 'file=@"<File Path>"'
+```
+```bash bfsi
+curl --location --request POST 'https://revapi.reverieinc.com/upload' \
+--header 'src_lang: hi' \
+--header 'domain: bfsi' \
+--header 'REV-API-KEY: <YOUR API KEY>' \
+--header 'REV-APPNAME: stt_file' \
+--header 'REV-APP-ID: <YOUR API-ID>' \
+--form 'file=@"<File Path>"'
+```
+</CodeGroup>
+
+
+### `format`
+The audio sampling rate and the data format of the speech. Refer to [Supporting Audio Formats](/usage-guides/speech-to-text/supported-audio-formats) to know the supporting audio formats. By default, the `format` = 16k_int16. (WAV, Signed 16 bit, 16,000 or 16K Hz).
+
+**For Example**: 
+<CodeGroup>
+```bash format = 16k_int16
+curl --location --request POST 'https://revapi.reverieinc.com/upload' \
+--header 'src_lang: hi' \
+--header 'domain: generic' \
+--header 'REV-API-KEY: <YOUR API KEY>' \
+--header 'REV-APPNAME: stt_file' \
+--header 'REV-APP-ID: <YOUR API-ID>' \
+--header 'format: 16k_int16' \
+--form 'file=@"<File Path>"'
+```
+```bash format = wav
+curl --location --request POST 'https://revapi.reverieinc.com/upload' \
+--header 'src_lang: hi' \
+--header 'domain: bfsi' \
+--header 'REV-API-KEY: <YOUR API KEY>' \
+--header 'REV-APPNAME: stt_file' \
+--header 'REV-APP-ID: <YOUR API-ID>' \
+--header 'format: wav' \
+--form 'file=@"<File Path>"'
+```
+</CodeGroup>
+
+### `logging`
+Possible Values are:
+1. `true` - stores audio and keep transcripts in logs.
+
+2. `no_audio` -  does not store audios but keep transcripts in logs.
+
+3. `no_transcript` - does not keep transcripts in logs but stores audios.
+
+4. `false` - does not keep neither audios nor transcripts in log.
+
+Default value is `true`
+
+**For Example**: 
+<CodeGroup>
+```javascript logging = true
+curl --location --request POST 'https://revapi.reverieinc.com/upload' \
+--header 'src_lang: hi' \
+--header 'domain: bfsi' \
+--header 'REV-API-KEY: <YOUR API KEY>' \
+--header 'REV-APPNAME: stt_file' \
+--header 'REV-APP-ID: <YOUR API-ID>' \
+--header 'format: wav' \
+--header 'logging: true'
+--form 'file=@"<File Path>"'
+```
+```javascript logging = false
+curl --location --request POST 'https://revapi.reverieinc.com/upload' \
+--header 'src_lang: hi' \
+--header 'domain: bfsi' \
+--header 'REV-API-KEY: <YOUR API KEY>' \
+--header 'REV-APPNAME: stt_file' \
+--header 'REV-APP-ID: <YOUR API-ID>' \
+--header 'format: wav' \
+--header 'logging: false'
+--form 'file=@"<File Path>"'
+```
+</CodeGroup>
+
+### `punctuate`
+It will enable punctuation and capitalisation in the transcript. The values it can take are `true` and `false`. Supported languages are: `en`, `hi`. Default value is true
+
+**For Example**: 
+<CodeGroup>
+```javascript punctuate = true
+curl --location --request POST 'https://revapi.reverieinc.com/upload' \
+--header 'src_lang: hi' \
+--header 'domain: bfsi' \
+--header 'REV-API-KEY: <YOUR API KEY>' \
+--header 'REV-APPNAME: stt_file' \
+--header 'REV-APP-ID: <YOUR API-ID>' \
+--header 'format: wav' \
+--header 'punctuate: true'
+--form 'file=@"<File Path>"'
+```
+```javascript punctuate = false
+curl --location --request POST 'https://revapi.reverieinc.com/upload' \
+--header 'src_lang: hi' \
+--header 'domain: bfsi' \
+--header 'REV-API-KEY: <YOUR API KEY>' \
+--header 'REV-APPNAME: stt_file' \
+--header 'REV-APP-ID: <YOUR API-ID>' \
+--header 'format: wav' \
+--header 'punctuate: false'
+--form 'file=@"<File Path>"'
+```
+</CodeGroup>
+
+
+
+

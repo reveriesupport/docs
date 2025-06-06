@@ -1,0 +1,362 @@
+---
+title: "Getting Started"
+description: "An introduction to getting transcription data from pre-recorded audio files."
+---
+This guide will walk you through how to transcribe pre-recorded audio with the Reverie API. We provide two scenarios to try: transcribe a remote file and transcribe a local file.
+
+<Note>
+  Before you start, you'll need to follow the steps in the [Get your API
+  Credentials](/authentication) to obtain your API key.
+</Note>
+
+## Make your first Call
+
+Make your first API Call using the cURL request. Add your own API Credentials where it says `<YOUR-APP-ID>` & `<YOUR-API-KEY>`
+and then run the following example in a terminal or your favorite API client. 
+
+### Step 1 : Upload the Audio File
+#### Request : Transcribing Audio
+```bash
+curl --location --request POST 'https://revapi.reverieinc.com/' \
+--header 'src_lang: hi' \
+--header 'domain: generic' \
+--header 'REV-API-KEY: <YOUR API KEY>' \
+--header 'REV-APPNAME: stt_file' \
+--header 'REV-APP-ID: <YOUR API-ID>' \
+--form 'audio_file=@"<File Path>"
+```
+
+#### Request: Transcribing Audio other than Default Format
+```bash
+curl --location --request POST 'https://revapi.reverieinc.com/' \
+--header 'src_lang: hi' \
+--header 'domain: generic' \
+--header 'REV-API-KEY: <YOUR API KEY>' \
+--header 'REV-APPNAME: stt_file' \
+--header 'REV-APP-ID: <YOUR API-ID>' \
+--header 'format: mp3'
+--form 'audio_file=@"<File Path>"'
+```
+
+#### Response: Success
+```json
+{
+    "id": "ddf4ebda44af4fdf95118af9a6f14d46fce12ed85347471d",
+    "success": true,
+    "final": true,
+    "text": "नाइनटी एट पॉइंट थ्री एफएम पर प्ले करिए",
+    "cause": "EOF received",
+    "confidence": 0.891,
+    "display_text": "98.3 एफएम पर प्ले करिए"
+}
+```
+#### Response: Error Message
+```json 
+{
+    "id": "03e4f260551345e6832bf62ba273e0096fd303e72f94453f",
+    "success": false,
+    "text": "",
+    "final": true,
+    "confidence": 1.0,
+    "cause": "no file given",
+    "display_text": ""  }
+```
+
+## API References
+
+### HTTP Request URL
+| URL Elements       | Sample URL                     |
+|--------------------|--------------------------------|
+| https://(hostname) | https://revapi.reverieinc.com/ |
+
+#### Headers
+
+<ParamField header="REV-API-KEY" type="string" required>
+  {" "}
+  API key shared by the Reverie team
+</ParamField> 
+<ParamField header="REV-APP-ID" type="string" required>
+  {" "}
+  APP ID shared by the Reverie team
+</ParamField>
+<ParamField header="REV-APPNAME" type="string" required>
+  {" "}
+  Value if this string should always be `stt_file` 
+</ParamField>
+<ParamField header="src_lang" type="string" required>
+  {" "}  
+- Specify the language code.  <br />
+- Example: `hi` <br />
+- Refer to section [Language Codes](/usage-guides/speech-to-text/supported-languages) for valid language code.
+</ParamField>  
+
+<ParamField header="domain" type="string" required>
+  {" "}
+  
+- This field identifies your use case type and set of the terminology defined for transcription.  <br />
+- e.g. for general audio is ‘generic’ <br />
+- It is only required for the first API i.e Upload File API.
+</ParamField> 
+
+<ParamField header="format" type="string">
+  {" "}
+  
+- Mention the audio sample rate and file format of the uploaded file.    <br />
+- Refer to section [Supported Audio Formats](/usage-guides/speech-to-text/supported-audio-formats) for valid audio format code. <br />
+- It is only required for the first API i.e Upload File API
+- Note: 
+    - By default, the format = `16k_int16`. (WAV, Signed 16 bit, 16,000 or 16K Hz).
+    - It is an optional parameter.
+</ParamField> 
+
+#### Query Parameter
+<ParamField query="audio_file" type="file" required>
+  {" "}
+  
+- An audio file for which the transcript is desired.
+</ParamField> 
+#### Response
+<ParamField header="id" type="string">
+  {" "}
+  
+- A unique Identity number auto-assigned by the API for each request, to be used to fetch job status and transcripts.
+
+</ParamField> 
+
+<ParamField header="success" type="boolean">
+  {" "}
+  
+- Provides true or false based on the nature of the response returned by the API.
+
+</ParamField> 
+
+
+<ParamField header="final" type="boolean">
+  {" "}
+  
+- Provides whether the response is the final response returned by the API.
+
+</ParamField> 
+
+<ParamField header="text" type="string">
+  {" "}
+  
+- Provides the trascripted response returned by the API for the audio file.
+
+</ParamField>
+
+<ParamField header="cause" type="string">
+  {" "}
+  
+- Reason for obtaining the final output, generally due to End Of File (EOF) received.
+
+</ParamField>
+
+<ParamField header="confidence" type="float">
+  {" "}
+  
+- Provides the confidence on the scale of 0 - 1 for the output.
+
+</ParamField>
+
+<ParamField header="display_text" type="string">
+  {" "}
+  
+- Provides the display text for the final output based on some post processing.
+
+</ParamField>
+## SDKs
+
+Reverie has several SDKs that can make it easier to use the API.
+Follow these steps to use the SDK of your choice to make a Reverie Speech-to-Text request.
+
+## Install Dependencies
+
+<CodeGroup>
+
+```bash JavaScript
+npm i @reverieit/reverie-client
+```
+
+```bash Python
+pip install reverie-sdk
+```
+
+</CodeGroup>
+## Transcribe Audio from an Audio File
+
+To automatically transcribe pre-recorded audio using Reverie’s SDK, follow these steps
+
+<CodeGroup>
+```javascript Javascript
+const ReverieClient = require("reverie-client");
+
+const reverieClient = new ReverieClient({
+apiKey: "YOUR-API-KEY",
+appId: "YOUR-APP-ID",
+});
+
+const response = await reverieClient.transcribeAudio({
+audioFile: file,
+language: lang,
+});
+
+console.log("Response from API:", response);
+
+````
+
+```python Python
+from reverie_sdk import ReverieClient
+
+client = ReverieClient(
+    api_key="<YOUR API KEY>",
+    app_id="<YOUR APP ID>",
+)
+
+resp = client.asr.stt_file(
+    src_lang="en",
+    data=open("./path/to/audio.wav", "rb").read(),
+)
+print(resp)
+```
+```go GoLang
+package main
+
+import (
+"bytes"
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"mime/multipart"
+	"net/http"
+	"os"
+)
+
+const (
+	apiURL     = "https://revapi.reverieinc.com/"
+	apiKey     = "your_api_key"   
+	appID      = "your_app_id"
+	appName    = "stt_file"
+	srcLang    = "en"
+	domain     = "generic"
+	audioPath  = "audio.wav"
+)
+
+type ApiResponse struct {
+	DisplayText string `json:"display_text"`
+}
+
+func transcribeAudio(filePath string) (string, error) {
+	file, err := os.Open(filePath)
+	if err != nil {
+		return "", fmt.Errorf("error opening file: %v", err)
+	}
+	defer file.Close()
+
+	var requestBody bytes.Buffer
+	writer := multipart.NewWriter(&requestBody)
+	part, err := writer.CreateFormFile("audio_file", filePath)
+	if err != nil {
+		return "", fmt.Errorf("error creating form file: %v", err)
+	}
+
+	fileBytes, err := ioutil.ReadAll(file)
+	if err != nil {
+		return "", fmt.Errorf("error reading file: %v", err)
+	}
+	part.Write(fileBytes)
+	writer.Close()
+
+	req, err := http.NewRequest("POST", apiURL, &requestBody)
+	if err != nil {
+		return "", fmt.Errorf("error creating request: %v", err)
+	}
+
+	req.Header.Set("src_lang", srcLang)
+	req.Header.Set("domain", domain)
+	req.Header.Set("REV-API-KEY", apiKey)
+	req.Header.Set("REV-APPNAME", appName)
+	req.Header.Set("REV-APP-ID", appID)
+	req.Header.Set("Content-Type", writer.FormDataContentType())
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		return "", fmt.Errorf("error sending request: %v", err)
+	}
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return "", fmt.Errorf("error reading response: %v", err)
+	}
+
+	var apiResponse ApiResponse
+	if err := json.Unmarshal(body, &apiResponse); err != nil {
+		return "", fmt.Errorf("error parsing JSON: %v", err)
+	}
+
+	return apiResponse.DisplayText, nil
+}
+
+func main() {
+	transcription, err := transcribeAudio(audioPath)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+	fmt.Println("Transcription:", transcription)
+}
+```
+
+</CodeGroup>
+
+## Results
+
+In order to see the results from Reverie, you must run the application. Run your application from the terminal. Your transcripts will appear in your shell.
+
+<CodeGroup>
+
+```bash JavaScript
+# Run your application using the file you created in the previous step
+# Example:
+npm start
+```
+
+```python Python
+# Run your application using the file you created in the previous step
+# Example:
+python main.py
+```
+
+```go GoLang
+// Run your application using the file you created in the previous step
+// Example:
+go run main.go
+```
+
+</CodeGroup>
+
+## Analyzing the Response
+
+```json
+{
+    "id": "ddf4ebda44af4fdf95118af9a6f14d46fce12ed85347471d",
+    "success": true,
+    "final": true,
+    "text": "नाइनटी एट पॉइंट थ्री एफएम पर प्ले करिए",
+    "cause": "EOF received",
+    "confidence": 0.891,
+    "display_text": "98.3 एफएम पर प्ले करिए"
+}
+```
+
+In this response we see:
+
+- `id` : A unique Identity number auto-assigned by the API for each request.
+- `success` : Provides a message code which can be used to look up the nature of the response returned by the API.
+- `final` :Provides a brief description about the response returned by the API.
+- `text` : An array of transcript objects including, channel_number, transcript, list of words with start time, end time and confidence.Please check the sample response.
+- `cause` : An array of transcript objects including, channel_number, transcript, list of words with start time, end time and confidence.Please check the sample response.
+- `confidence` : An array of transcript objects including, channel_number, transcript, list of words with start time, end time and confidence.Please check the sample response.
+- `display_text` : An array of transcript objects including, channel_number, transcript, list of words with start time, end time and confidence.Please check the sample response.

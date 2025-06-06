@@ -32,12 +32,12 @@ REV-APP-ID: <YOUR-APP-ID>
 Here are the cURL requests of all the APIs.
 
 <CodeGroup>
-```bash Speech-to-Text (Batch)
+```bash Speech-to-Text (File)
 curl --location --request POST 'https://revapi.reverieinc.com/upload' \
 --header 'src_lang: hi' \
 --header 'domain: generic' \
 --header 'REV-API-KEY: <YOUR API KEY>' \
---header 'REV-APPNAME: stt_batch' \
+--header 'REV-APPNAME: stt_file' \
 --header 'REV-APP-ID: <YOUR API-ID>' \
 --header 'subtitles: true' \
 --form 'file=@"<File Path>"'
