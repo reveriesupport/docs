@@ -52,14 +52,19 @@ console.log("Response from API:", response);
 from reverie_sdk import ReverieClient
 
 client = ReverieClient(
-    api_key="<YOUR API KEY>",
-    app_id="<YOUR APP ID>",
+    api_key="MY_API_KEY",
+    app_id="MY_APP_ID",
 )
 
 resp = client.asr.stt_file(
     src_lang="en",
     data=open("./path/to/audio.wav", "rb").read(),
+    domain="generic",
+    format="16k_int16",
+    logging="true",
+    punctuate="true",
 )
+
 print(resp)
 ```
 ```go GoLang

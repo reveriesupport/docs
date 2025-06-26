@@ -61,11 +61,12 @@ await reverieClient.stop_stt();
 
 ```python Python
 import pyaudio, asyncio
-from reverie_sdk import ReverieClient, AudioStream
+from reverie_sdk import ReverieClient
+from reverie_sdk.services.asr import AudioStream
 
 client = ReverieClient(
-    api_key="<YOUR-API-KEY>",
-    app_id="<YOUR-APP-ID>",
+    api_key="REVERIE_API_KEY",
+    app_id="REVERIE_APP_ID",
 )
 
 stream = AudioStream()
@@ -80,10 +81,10 @@ def mic_callback(in_data, frame_count, time_info, status):
 
 async def main():
     pa_stream = pa.open(
-        rate=16000,
-        channels=1,
-        format=pyaudio.paInt16,
-        frames_per_buffer=1024,
+        rate=RATE,
+        channels=CHANNELS,
+        format=FORMAT,
+        frames_per_buffer=CHUNK_SIZE,
         input=True,
         stream_callback=mic_callback,
     )
@@ -93,9 +94,16 @@ async def main():
 
     try:
         await client.asr.stt_stream_async(
-            src_lang="en",  # Language code
+            src_lang="en",
             bytes_or_stream=stream,
-            callback=print,  # Handle transcription results
+            callback=print,
+            continuous="0",
+            domain="generic",
+            format="16k_int16",
+            logging="true",
+            punctuate="true",
+            silence=15,
+            timeout=15,
         )
     except Exception as err:
         print(err)
@@ -103,7 +111,9 @@ async def main():
         pa_stream.stop_stream()
         pa_stream.close()
 
+
 asyncio.run(main())
+
 pa.terminate()
 ````
 
