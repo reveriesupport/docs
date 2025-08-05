@@ -189,14 +189,14 @@ To automatically transcribe pre-recorded audio using Reverie’s SDK, follow the
 
 <CodeGroup>
 ```javascript Javascript
-const ReverieClient = require("reverie-client");
+const ReverieClient = require("@reverieit/reverie-client");
 
 const reverieClient = new ReverieClient({
 apiKey: "YOUR-API-KEY",
 appId: "YOUR-APP-ID",
 });
 
-const response = await reverieClient.transcribeAudio({
+const response = await reverieClient.stt_file({
 audioFile: file,
 language: lang,
 });

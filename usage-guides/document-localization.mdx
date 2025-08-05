@@ -37,7 +37,7 @@ The following code shows how to localize the document.
 
 <CodeGroup>
 ```javascript JavaScript
-const ReverieClient = require("reverie-client");
+const ReverieClient = require("@reverieit/reverie-client");
 
 const reverieClient = new ReverieClient({
   apiKey: "YOUR-API-KEY",
@@ -46,7 +46,7 @@ const reverieClient = new ReverieClient({
 
 async function translateDocument(file) {
   try {
-    const translationResult = await reverieClient.translateDocument({
+    const translationResult = await reverieClient.translate_document({
       sourceLanguage: "english",
       targetLanguage: "hindi",
       uploadedFile: file, 

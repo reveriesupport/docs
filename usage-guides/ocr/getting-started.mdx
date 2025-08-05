@@ -54,7 +54,7 @@ The following code shows how to process the document.
 
 <CodeGroup>
 ```javascript JavaScript
-const ReverieClient = require("reverie-client");
+const ReverieClient = require("@reverieit/reverie-client");
 
 const reverieClient = new ReverieClient({
   apiKey: "YOUR-API-KEY",
@@ -63,7 +63,7 @@ const reverieClient = new ReverieClient({
 
 async function uploadOCRDocument(file) {
   try {
-    const ocrResult = await reverieClient.uploadDocument({
+    const ocrResult = await reverieClient.upload_document({
       file: file,                 
       file_type: "img",        
       selectedLanguages: "en",   

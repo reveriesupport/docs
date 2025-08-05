@@ -31,14 +31,14 @@ To transcribe pre-recorded audio using one of Reverie's API, follow these steps.
 
 <CodeGroup>
 ```javascript Javascript
-const ReverieClient = require("reverie-client");
+const ReverieClient = require("@reverieit/reverie-client");
 
 const reverieClient = new ReverieClient({
 apiKey: "YOUR-API-KEY",
 appId: "YOUR-APP-ID",
 });
 
-const response = await reverieClient.transcribeAudio({
+const response = await reverieClient.stt_batch({
 audioFile: file,
 language: lang,
 subtitles: subtitles
@@ -341,7 +341,9 @@ In this response we see:
 
 The Speech-to-Text solution supports transcription in multiple languages, tailored for diverse regional and linguistic needs:
 
+- `en` - Indian English
 - `hi` - Hindi
+- `hi_en` - Hinglish
 - `bn` - Bengali
 - `gu` - Gujarati
 - `kn` - Kannada
@@ -350,7 +352,6 @@ The Speech-to-Text solution supports transcription in multiple languages, tailor
 - `pa` - Punjabi
 - `ta` - Tamil
 - `te` - Telugu
-- `en` - Indian English
 - `as` - Assamese
 - `or` - Odia
 
