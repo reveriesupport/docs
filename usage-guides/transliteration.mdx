@@ -24,10 +24,9 @@ curl --location --request POST 'https://revapi.reverieinc.com/' \
 --header 'REV-APP-ID: <YOUR APP-ID>' \
 --header 'src_lang: en' \
 --header 'tgt_lang: hi' \
---header 'domain: generic' \
+--header 'domain: 1' \
 --header 'cnt_lang: en' \
 --header 'REV-APPNAME: transliteration' \
---header 'REV-APPVERSION: 2.0' \
 --data-raw '{"data": ["Reverie Language Technologies ltd website address is www.reverieinc.com"],
 }'
 ```
@@ -153,10 +152,9 @@ func main() {
 	req.Header.Set("REV-APP-ID", appID)
 	req.Header.Set("src_lang", "en")
 	req.Header.Set("tgt_lang", "hi")
-	req.Header.Set("domain", "generic")
+	req.Header.Set("domain", "1")
 	req.Header.Set("cnt_lang", "en")
 	req.Header.Set("REV-APPNAME", "transliteration")
-	req.Header.Set("REV-APPVERSION", "2.0")
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
@@ -268,17 +266,15 @@ The API returns a `responseList`, which is an array containing the transliterate
 
 ## Supported Domains
 | Domain ID       | Description                                                                 |
-|------------------|-----------------------------------------------------------------------------|
-| generic          | Transliterates generic content regardless of specific domain.                |
-| pii_names        | Transliterates people’s names and surnames.                                  |
-| pii_addresses    | Transliterates location details like street name, city name, state, etc.     |
-| OnlyEnglish      | Transliterates source content from English script to Indic language script.  |
-| bfsi             | Transliterates banking and financial terminologies accurately.               |
-| ecommerce        | Transliterates brand and product catalog in the ecommerce domain.            |
-| food             | Transliterates food and grocery items like menus, packaged food, and more.   |
-| infotainment     | Transliterates song lyrics, movie titles, artist names, and media content.   |
-| medical          | Transliterates healthcare terms like medicine names and insurance (Hindi only). |
-| enterprise       | Transliterates job titles, company names, and corporate terminology.         |
+|-----------------|-----------------------------------------------------------------------------|
+| 1               | Transliterates generic content regardless of specific domain.               |
+| 2               | Transliterates people’s names and surnames.                                 |
+| 9               | Transliterates location details like street name, city name, state, etc.    |
+| 4               | Transliterates source content from English script to Indic language script. |
+| 6               | Transliterates banking and financial terminologies accurately.              |
+| 7               | Transliterates brand and product catalog in the ecommerce domain.           |
+| 22,26           | Transliterates food and grocery items like menus, packaged food, and more.  |
+| 25              | Transliterates song lyrics, movie titles, artist names, and media content.  |
 
 ## Sample Code
 

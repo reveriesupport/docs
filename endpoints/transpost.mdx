@@ -15,9 +15,8 @@ playground: "none"
  --header 'REV-APP-ID: <YOUR APP-ID>' \
  --header 'src_lang: en' \
  --header 'tgt_lang: hi' \
- --header 'domain: generic' \
+ --header 'domain: 1' \
  --header 'REV-APPNAME: transliteration' \
- --header 'REV-APPVERSION: 2.0' \
  --data-raw '{
  "data": ["Hello, how are you?"],
  "isBulk": true,
@@ -78,11 +77,7 @@ playground: "none"
  </ParamField> <ParamField header="REV-APPNAME" type="string" required>
    {" "}
    Application name (e.g., `transliteration`).{" "}
- </ParamField> <ParamField header="REV-APPVERSION" type="string" required>
-   {" "}
-   Application version (e.g., `2.0`).{" "}
  </ParamField>
- 
  ### Body
  
 <ParamField body="data" type="string[]" required>

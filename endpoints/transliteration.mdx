@@ -12,9 +12,8 @@ description: "The Transliteration API enables you to convert text content from o
  --header 'REV-APP-ID: <YOUR APP-ID>' \
  --header 'src_lang: en' \
  --header 'tgt_lang: hi' \
- --header 'domain: generic' \
+ --header 'domain: 1' \
  --header 'REV-APPNAME: transliteration' \
- --header 'REV-APPVERSION: 2.0' \
  --data-raw '{
  "data": ["Hello, how are you?"],
  "isBulk": true,
@@ -118,10 +117,9 @@ func main() {
 	req.Header.Set("REV-APP-ID", appID)
 	req.Header.Set("src_lang", "en")
 	req.Header.Set("tgt_lang", "hi")
-	req.Header.Set("domain", "generic")
+	req.Header.Set("domain", "1")
 	req.Header.Set("cnt_lang", "en")
 	req.Header.Set("REV-APPNAME", "transliteration")
-	req.Header.Set("REV-APPVERSION", "2.0")
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
@@ -170,9 +168,6 @@ func main() {
  <ParamField header="REV-APPNAME" type="string" default="transliteration" required>
    Application name i.e., transliteration
  </ParamField> 
- <ParamField header="REV-APPVERSION" default="2.0" type="string" required>
-   Application version i.e., 2.0
- </ParamField>
  <ParamField header="src_lang" type="string" required>
    Source language code : hi, as, bn, gu, kn, ml, mr, or, pa, ta, te, en, ur, sd, doi, kon, brx, ks, mai, mni, sa, sat
  </ParamField> 
@@ -180,7 +175,7 @@ func main() {
    Target language code : hi, as, bn, gu, kn, ml, mr, or, pa, ta, te, en, ur, sd, doi, kon, brx, ks, mai, mni, sa, sat
  </ParamField> <ParamField header="domain" type="string" required>
    {" "}
-   Domain category : generic, pii_names, pii_addresses, OnlyEnglish, bfsi, ecommerce, food, infotainment, medical, enterprise
+   Domain category : generic, pii_names, pii_addresses, OnlyEnglish, bfsi, ecommerce, food, infotainment
 
  </ParamField> <ParamField header="cnt_lang" type="string">
    Content language code : en

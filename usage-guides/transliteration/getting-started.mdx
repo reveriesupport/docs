@@ -23,10 +23,9 @@ curl --location --request POST 'https://revapi.reverieinc.com/' \
 --header 'REV-APP-ID: <YOUR APP-ID>' \
 --header 'src_lang: en' \
 --header 'tgt_lang: hi' \
---header 'domain: generic' \
+--header 'domain: 1' \
 --header 'cnt_lang: en' \
 --header 'REV-APPNAME: transliteration' \
---header 'REV-APPVERSION: 2.0' \
 --data-raw '{"data": ["Reverie Language Technologies ltd website address is www.reverieinc.com"],
 }'
 ```
@@ -152,10 +151,9 @@ func main() {
 	req.Header.Set("REV-APP-ID", appID)
 	req.Header.Set("src_lang", "en")
 	req.Header.Set("tgt_lang", "hi")
-	req.Header.Set("domain", "generic")
+	req.Header.Set("domain", "1")
 	req.Header.Set("cnt_lang", "en")
 	req.Header.Set("REV-APPNAME", "transliteration")
-	req.Header.Set("REV-APPVERSION", "2.0")
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
